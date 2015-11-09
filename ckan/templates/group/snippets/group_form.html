@@ -26,6 +26,8 @@
 
   {% endblock %}
 
+  {% block basic_fields_custom %}{% endblock %}
+
   {% block custom_fields %}
     {% for extra in data.extras %}
       {% set prefix = 'extras__%d__' % loop.index0 %}
