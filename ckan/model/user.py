@@ -292,6 +292,17 @@ class User(vdm.sqlalchemy.StatefulObjectMixin,
         return [user.id for user in query.all()]
 
 
+    @classmethod
+    def get_all_pending_users(cls):
+        '''Return all pendings users.
+
+        :rtype: list of ckan.model.user.User objects
+
+        '''
+        q = meta.Session.query(cls).filter_by(state=core.State.PENDING)
+        return q.all()
+
+
 meta.mapper(User, user_table,
     properties={'password': synonym('_password', map_column=True)},
     order_by=user_table.c.name)
