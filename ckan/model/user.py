@@ -245,6 +245,7 @@ class User(vdm.sqlalchemy.StatefulObjectMixin,
             .join(model.Member, model.Member.group_id == model.Group.id and \
                        model.Member.table_name == 'user').\
                join(model.User, model.User.id == model.Member.table_id).\
+               filter(model.Member.state == 'active').\
                filter(model.Member.table_id == self.id)
         if capacity:
             q = q.filter(model.Member.capacity == capacity)
