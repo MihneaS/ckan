@@ -5,7 +5,6 @@ import unittest
 import nose.tools as nt
 from passlib.hash import pbkdf2_sha512
 
-import core
 import ckan.tests.factories as factories
 import ckan.tests.helpers as helpers
 import ckan.model as model
@@ -149,4 +148,4 @@ class TestPassword(unittest.TestCase):
 
     def test_query_by_state(self):
         user = factories.User()
-        assert model.User.by_state(core.State.ACTIVE) == 1
+        assert model.User.by_state(model.State.ACTIVE) == 1
