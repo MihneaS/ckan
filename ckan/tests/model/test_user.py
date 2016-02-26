@@ -7,6 +7,7 @@ from passlib.hash import pbkdf2_sha512
 
 import ckan.tests.factories as factories
 import ckan.tests.helpers as helpers
+import ckan.core as core
 import ckan.model as model
 
 
