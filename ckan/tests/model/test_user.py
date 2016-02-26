@@ -145,3 +145,7 @@ class TestPassword(unittest.TestCase):
         user_obj.save()
 
         nt.assert_true(user_obj.validate_password(password))
+
+    def test_query_by_state(self):
+        user = factories.User()
+        assert model.User.by_state(core.State.ACTIVE) == 1

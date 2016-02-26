@@ -52,6 +52,14 @@ class User(vdm.sqlalchemy.StatefulObjectMixin,
         return meta.Session.query(cls).filter_by(email=email).all()
 
     @classmethod
+    def by_state(cls, state):
+        '''Return all users by state (eg pending).
+
+        :rtype: list of ckan.model.user.User objects
+        '''
+        return meta.Session.query(cls).filter_by(state=state).all()
+
+    @classmethod
     def get(cls, user_reference):
         # double slashes in an openid often get turned into single slashes
         # by browsers, so correct that for the openid lookup
@@ -290,17 +298,6 @@ class User(vdm.sqlalchemy.StatefulObjectMixin,
         query = query.filter(or_(self.name.in_(user_list),
                                  self.id.in_(user_list)))
         return [user.id for user in query.all()]
-
-
-    @classmethod
-    def get_all_pending_users(cls):
-        '''Return all pendings users.
-
-        :rtype: list of ckan.model.user.User objects
-
-        '''
-        q = meta.Session.query(cls).filter_by(state=core.State.PENDING)
-        return q.all()
 
 
 meta.mapper(User, user_table,
